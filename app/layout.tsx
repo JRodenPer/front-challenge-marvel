@@ -1,15 +1,17 @@
-// app/layout.tsx
-
-import { ReactNode } from "react";
-import StyleAndContextRegistry from "./lib/registry";
+import { ReactNode, useState } from "react";
+import RegistrySC from "./lib/registrySC";
 import Head from "./head";
+import RegistryQuery from "./lib/registryQuery";
+import GlobalStyle from "./GlobalStyles";
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
       <Head />
       <body>
-        <StyleAndContextRegistry>{children}</StyleAndContextRegistry>
+        <RegistrySC>
+          <RegistryQuery>{children}</RegistryQuery>
+        </RegistrySC>
       </body>
     </html>
   );

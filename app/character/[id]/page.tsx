@@ -19,7 +19,6 @@ export default function CharacterPage() {
     enabled: !!id,
     refetchOnWindowFocus: false,
   });
-  console.log(comics);
 
   const {
     data: character,

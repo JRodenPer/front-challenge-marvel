@@ -3,6 +3,7 @@ import RegistrySC from "./lib/registrySC";
 import Head from "./head";
 import RegistryQuery from "./lib/registryQuery";
 import GlobalStyle from "./GlobalStyles";
+import RegistryContext from "./lib/registryContext";
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
@@ -10,7 +11,9 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       <Head />
       <body>
         <RegistrySC>
-          <RegistryQuery>{children}</RegistryQuery>
+          <RegistryContext>
+            <RegistryQuery>{children}</RegistryQuery>
+          </RegistryContext>
         </RegistrySC>
       </body>
     </html>

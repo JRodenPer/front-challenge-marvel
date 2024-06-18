@@ -13,12 +13,14 @@ export const TopbarContainer = styled.div`
 export const LogoImage = styled.img`
   width: 130px;
   height: 52px;
+  cursor: pointer;
 `;
 
 export const LikesContainer = styled.div`
   display: flex;
   align-items: center;
   gap: 8px;
+  cursor: pointer;
 `;
 
 export const CustomText = styled.div`

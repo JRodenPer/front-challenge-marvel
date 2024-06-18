@@ -16,7 +16,7 @@ const queryClient = new QueryClient();
 
 const renderWithClient = (ui: React.ReactElement) => {
   return render(
-    <QueryClientProvider client={queryClient}>{ui}</QueryClientProvider>,
+    <QueryClientProvider client={queryClient}>{ui}</QueryClientProvider>
   );
 };
 
@@ -32,6 +32,7 @@ const mockCharacters: Character[] = [
       path: "",
       extension: "jpg",
     },
+    description: "",
   },
   {
     id: "2",
@@ -40,6 +41,7 @@ const mockCharacters: Character[] = [
       path: "",
       extension: "jpg",
     },
+    description: "",
   },
 ];
 

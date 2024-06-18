@@ -5,6 +5,8 @@ import { fetchComics } from "@/app/utils/fetchComics";
 import { usePathname } from "next/navigation";
 import React, { useEffect, useRef, useState } from "react";
 import { fetchCharacter } from "@/app/utils/fetchCharacter";
+import CharacterDetail from "@/app/components/CharacterDetail";
+import LoadingBar from "@/app/components/LoadingBar";
 
 export default function CharacterPage() {
   const pathname = usePathname();
@@ -37,7 +39,19 @@ export default function CharacterPage() {
 
   return (
     <div>
-      {character && <h1>Personaje:{character.name}</h1>}
+      {(comicsLoading || characterLoading) && (
+        <LoadingBar isLoading={!comicsLoading && !characterLoading} />
+      )}
+      {character && (
+        <CharacterDetail
+          imageUrl={
+            character.thumbnail.path + "." + character.thumbnail.extension
+          }
+          name={character.name}
+          description={character.description}
+          id={character.id}
+        />
+      )}
       {comics && (
         <div>
           <h2>Comics:</h2>

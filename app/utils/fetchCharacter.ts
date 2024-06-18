@@ -4,7 +4,7 @@ import { MARVEL_ENDPOINT } from "./constants";
 import { Character } from "../components/CharacterList/CharacterList.types";
 
 export async function fetchCharacter(
-  idCharacter: string | null
+  idCharacter: string | null,
 ): Promise<Character> {
   try {
     const publicKey = process.env.MARVEL_PUBLIC_KEY;
@@ -30,7 +30,7 @@ export async function fetchCharacter(
           apikey: publicKey,
           hash,
         },
-      }
+      },
     );
 
     const characterData = response.data.data.results.map((result: any) => ({

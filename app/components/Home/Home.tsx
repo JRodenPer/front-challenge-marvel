@@ -16,9 +16,7 @@ const Home: React.FC = () => {
   const [filterCharacters, setFilterCharacters] = useState<Character[]>([]);
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [resultText, setResultText] = useState<string>("");
-  const { idCharacters } = useLikes();
-  const [numLikes, setNumLikes] = useState(0);
-  const [isLikesFiltered, setIsLikesFiltered] = useState(false);
+  const { idCharacters, likeView } = useLikes();
   const {
     data: characters,
     isLoading: charactersLoading,
@@ -28,45 +26,33 @@ const Home: React.FC = () => {
   });
 
   useEffect(() => {
-    setNumLikes(idCharacters.length);
-  }, [idCharacters]);
-
-  useEffect(() => {
-    console.log(isLikesFiltered);
     if (characters) {
-      const filtered = isLikesFiltered
-        ? characters.filter((character: Character) =>
-            idCharacters.includes(character.id)
-          )
+      const filtered = likeView
+        ? characters
+            .filter((character: Character) =>
+              idCharacters.includes(character.id),
+            )
+            .filter((characterLike: Character) =>
+              characterLike.name
+                .toLowerCase()
+                .includes(searchTerm.toLowerCase()),
+            )
         : characters.filter((character: Character) =>
-            character.name.toLowerCase().includes(searchTerm.toLowerCase())
+            character.name.toLowerCase().includes(searchTerm.toLowerCase()),
           );
       setFilterCharacters(filtered);
       const items = filtered.length;
       const text = items === 1 ? " RESULT" : " RESULTS";
       setResultText(items.toString() + text);
     }
-  }, [searchTerm, characters, idCharacters, isLikesFiltered]);
+  }, [searchTerm, characters, idCharacters, likeView]);
 
   const handleSearchChange = (event: ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value);
   };
 
-  const handleLikeClick = () => {
-    setIsLikesFiltered(true);
-  };
-
-  const handleLogoClick = () => {
-    setIsLikesFiltered(false);
-  };
-
   return (
     <S.MainContainer>
-      <Topbar
-        likes={numLikes}
-        onLogoClick={handleLogoClick}
-        onLikeClick={handleLikeClick}
-      />
       {charactersLoading && <LoadingBar isLoading={!charactersLoading} />}
       {characters && (
         <S.BodyContainer>

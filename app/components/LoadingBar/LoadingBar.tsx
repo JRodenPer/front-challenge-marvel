@@ -37,7 +37,9 @@ const Bar = styled.div<{ $isLoading: boolean }>`
   ${(props) =>
     !props.$isLoading &&
     css`
-      animation: ${fillAnimation} 1s forwards, ${fadeOut} 1s 1s forwards;
+      animation:
+        ${fillAnimation} 1s forwards,
+        ${fadeOut} 1s 1s forwards;
     `}
 `;
 

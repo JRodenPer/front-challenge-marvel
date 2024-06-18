@@ -9,7 +9,7 @@ interface Comic {
 }
 
 export async function fetchComics(
-  idCharacter: string | null
+  idCharacter: string | null,
 ): Promise<Comic[]> {
   try {
     const publicKey = process.env.MARVEL_PUBLIC_KEY;
@@ -37,7 +37,7 @@ export async function fetchComics(
           limit: 20,
           orderBy: "onsaleDate",
         },
-      }
+      },
     );
 
     const comicsData = response.data.data.results.map((result: any) => ({

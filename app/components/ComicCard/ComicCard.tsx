@@ -14,7 +14,7 @@ const CardContainer = styled.div`
   background-color: #fff;
   min-width: 179.2px;
   height: auto;
-  margin: 16px;
+  gap: 10px;
 `;
 
 const CardImage = styled.img`

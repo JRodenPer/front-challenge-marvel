@@ -53,12 +53,19 @@ const Image = styled.img`
   object-fit: cover;
 `;
 
-const Title = styled.div`
+const Title = styled.h1`
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
   justify-content: space-between;
+
+  font-family: "Roboto Condensed", Helvetica, Arial, sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 40px;
+  line-height: 47px;
+  text-transform: uppercase;
 `;
 
 const DetailsContainer = styled.div`
@@ -114,7 +121,7 @@ const CharacterDetail: React.FC<CharacterDetailProps> = ({
           <DetailsContainer>
             <TextContainer>
               <Title>
-                <h2>{name}</h2>
+                {name}
                 <HeartButton
                   isHover={false}
                   isLike={isLike}

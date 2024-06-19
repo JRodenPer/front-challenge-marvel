@@ -13,6 +13,8 @@ const MainContainer = styled.div`
   height: 100%;
   align-items: center;
   flex-direction: column;
+  margin-top: 48px;
+  gap: 24px;
 `;
 
 const ListContainer = styled.div`
@@ -21,11 +23,11 @@ const ListContainer = styled.div`
   white-space: nowrap;
   display: flex;
   align-items: center;
-  padding: 16px;
   cursor: grab;
   user-select: none;
   width: 960px;
   align-items: stretch;
+  gap: 16px;
 
   &:active {
     cursor: grabbing;
@@ -58,7 +60,6 @@ const TitleContainer = styled.div`
   line-height: 38px;
   display: flex;
   align-items: center;
-  padding: 16px;
   cursor: grab;
   user-select: none;
   width: 960px;

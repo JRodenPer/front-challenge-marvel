@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
-import MiniCssExtractPlugin from 'mini-css-extract-plugin';
-import TerserPlugin from 'terser-webpack-plugin';
+import MiniCssExtractPlugin from "mini-css-extract-plugin";
+import TerserPlugin from "terser-webpack-plugin";
 
 const nextConfig = {
   compiler: {
@@ -15,11 +15,18 @@ const nextConfig = {
     if (!dev) {
       config.optimization.minimize = true;
       config.optimization.minimizer = [new TerserPlugin()];
-      config.plugins.push(new MiniCssExtractPlugin({
-        filename: '[name].[contenthash].css',
-        chunkFilename: '[id].[contenthash].css',
-      }));
+      config.plugins.push(
+        new MiniCssExtractPlugin({
+          filename: "[name].[contenthash].css",
+          chunkFilename: "[id].[contenthash].css",
+        }),
+      );
     }
+
+    config.module.rules.push({
+      test: /\.svg$/,
+      use: ["@svgr/webpack"],
+    });
 
     return config;
   },

@@ -5,6 +5,10 @@ import { fetchComics } from "@/app/utils/fetchComics";
 import { usePathname } from "next/navigation";
 import React, { useEffect, useRef, useState } from "react";
 import { fetchCharacter } from "@/app/utils/fetchCharacter";
+import CharacterDetail from "@/app/components/CharacterDetail";
+import LoadingBar from "@/app/components/LoadingBar";
+import ComicList from "@/app/components/ComicList";
+import ComicCard from "@/app/components/ComicCard";
 
 export default function CharacterPage() {
   const pathname = usePathname();
@@ -19,7 +23,6 @@ export default function CharacterPage() {
     enabled: !!id,
     refetchOnWindowFocus: false,
   });
-  console.log(comics);
 
   const {
     data: character,
@@ -38,16 +41,30 @@ export default function CharacterPage() {
 
   return (
     <div>
-      {character && <h1>Personaje:{character.name}</h1>}
+      {(comicsLoading || characterLoading) && (
+        <LoadingBar isLoading={!comicsLoading && !characterLoading} />
+      )}
+      {character && (
+        <CharacterDetail
+          imageUrl={
+            character.thumbnail.path + "." + character.thumbnail.extension
+          }
+          name={character.name}
+          description={character.description}
+          id={character.id}
+        />
+      )}
       {comics && (
-        <div>
-          <h2>Comics:</h2>
-          <ul>
-            {comics.map((comic) => (
-              <li key={comic.id}>{comic.title}</li>
-            ))}
-          </ul>
-        </div>
+        <ComicList>
+          {comics.map((comic) => (
+            <ComicCard
+              key={comic.id}
+              imageUrl={comic.thumbnail.path + "." + comic.thumbnail.extension}
+              title={comic.title}
+              date={comic.date}
+            />
+          ))}
+        </ComicList>
       )}
     </div>
   );

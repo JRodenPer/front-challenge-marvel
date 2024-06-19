@@ -7,6 +7,8 @@ import React, { useEffect, useRef, useState } from "react";
 import { fetchCharacter } from "@/app/utils/fetchCharacter";
 import CharacterDetail from "@/app/components/CharacterDetail";
 import LoadingBar from "@/app/components/LoadingBar";
+import ComicList from "@/app/components/ComicList";
+import ComicCard from "@/app/components/ComicCard";
 
 export default function CharacterPage() {
   const pathname = usePathname();
@@ -53,14 +55,16 @@ export default function CharacterPage() {
         />
       )}
       {comics && (
-        <div>
-          <h2>Comics:</h2>
-          <ul>
-            {comics.map((comic) => (
-              <li key={comic.id}>{comic.title}</li>
-            ))}
-          </ul>
-        </div>
+        <ComicList>
+          {comics.map((comic) => (
+            <ComicCard
+              key={comic.id}
+              imageUrl={comic.thumbnail.path + "." + comic.thumbnail.extension}
+              title={comic.title}
+              date={comic.date}
+            />
+          ))}
+        </ComicList>
       )}
     </div>
   );

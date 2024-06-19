@@ -5,11 +5,12 @@ import { MARVEL_ENDPOINT } from "./constants";
 interface Comic {
   id: string;
   title: string;
+  date: string;
   thumbnail: { path: string; extension: "jpg" };
 }
 
 export async function fetchComics(
-  idCharacter: string | null,
+  idCharacter: string | null
 ): Promise<Comic[]> {
   try {
     const publicKey = process.env.MARVEL_PUBLIC_KEY;
@@ -37,14 +38,26 @@ export async function fetchComics(
           limit: 20,
           orderBy: "onsaleDate",
         },
-      },
+      }
     );
 
-    const comicsData = response.data.data.results.map((result: any) => ({
-      id: result.id.toString(),
-      title: result.title,
-      thumbnail: result.thumbnail,
-    }));
+    const comicsData = response.data.data.results.map((result: any) => {
+      const dateResult = result.dates.find(
+        (item: { type: string; date: string }) => item.type === "onsaleDate"
+      )?.date;
+      const dateObj = new Date(dateResult);
+
+      const year = dateObj.getFullYear();
+
+      const date = Number.isNaN(year) ? "-" : year.toString();
+
+      return {
+        id: result.id.toString(),
+        title: result.title,
+        date,
+        thumbnail: result.thumbnail,
+      };
+    });
 
     return comicsData;
   } catch (error) {

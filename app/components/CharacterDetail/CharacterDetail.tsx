@@ -21,32 +21,51 @@ const slideDown = keyframes`
     }
 `;
 
-const Container = styled.div`
+const MainContainer = styled.div`
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+`;
+
+const AnimationContainer = styled.div`
   display: flex;
-  flex-direction: row;
   align-items: center;
   justify-content: center;
   background-color: black;
   color: white;
-  padding: 20px;
   border-top: 1px solid gray;
-  animation: ${slideDown} 0.5s ease-out forwards; /* Aplicación de la animación */
+  animation: ${slideDown} 0.5s ease-out forwards;
 `;
 
-const Banner = styled.div`
-  text-align: center;
+const Container = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  width: 960px;
+  height: 100%;
 `;
 
 const Image = styled.img`
-  max-width: 100%;
-  max-height: 300px; /* Ajustar según tus necesidades */
-  object-fit: contain;
+  width: 320px;
+  height: 320px;
+  object-fit: cover;
+`;
+
+const Title = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  justify-content: space-between;
 `;
 
 const DetailsContainer = styled.div`
   display: flex;
   justify-content: space-between;
   margin-top: 20px;
+  width: 100%;
 `;
 
 const TextContainer = styled.div`
@@ -54,8 +73,16 @@ const TextContainer = styled.div`
   padding: 0 20px;
 `;
 
-const IconContainer = styled.div`
-  flex: 0 0 auto;
+const Decoration = styled.div`
+  position: absolute;
+  background: white;
+  z-index: 2;
+
+  width: 36px;
+  height: 36px;
+  right: -18px;
+  bottom: -18px;
+  transform: rotate(45deg);
 `;
 
 const CharacterDetail: React.FC<CharacterDetailProps> = ({
@@ -80,25 +107,28 @@ const CharacterDetail: React.FC<CharacterDetailProps> = ({
   };
 
   return (
-    <Container>
-      <Banner>
-        <Image src={imageUrl} alt={name} />
-      </Banner>
-      <DetailsContainer>
-        <TextContainer>
-          <h2>{name}</h2>
-          <p>{description}</p>
-        </TextContainer>
-        <IconContainer>
-          <HeartButton
-            isHover={false}
-            isLike={isLike}
-            size={"BIG"}
-            onClick={handleClick}
-          />
-        </IconContainer>
-      </DetailsContainer>
-    </Container>
+    <MainContainer>
+      <AnimationContainer>
+        <Container>
+          <Image src={imageUrl} alt={name} />
+          <DetailsContainer>
+            <TextContainer>
+              <Title>
+                <h2>{name}</h2>
+                <HeartButton
+                  isHover={false}
+                  isLike={isLike}
+                  size={"BIG"}
+                  onClick={handleClick}
+                />
+              </Title>
+              <p>{description}</p>
+            </TextContainer>
+          </DetailsContainer>
+        </Container>
+        <Decoration />
+      </AnimationContainer>
+    </MainContainer>
   );
 };
 

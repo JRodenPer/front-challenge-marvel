@@ -32,7 +32,7 @@ const LoadingBarContainer = styled.div`
 
 const Bar = styled.div<{ $isLoading: boolean }>`
   height: 5.38px;
-  background-color: #ec1d24;
+  background-color: var(--item-color);
   width: ${(props) => (props.$isLoading ? "1px" : "100%")};
   ${(props) =>
     !props.$isLoading &&

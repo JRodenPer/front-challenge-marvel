@@ -8,7 +8,7 @@ export const TopbarContainer = styled.div`
   justify-content: space-between;
   align-items: center;
   flex-direction: row;
-  z-index: 200;
+  gap: 20px;
 `;
 
 export const LogoImage = styled.img`

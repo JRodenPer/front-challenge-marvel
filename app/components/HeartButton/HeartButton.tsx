@@ -1,8 +1,8 @@
 import styled from "styled-components";
 import Heart from "@/public/icons/heart.svg";
-import HeartBorder from "@/public/icons/HeartBorder.svg";
+import HeartBorder from "@/public/icons/heartBorder.svg";
 import HeartMin from "@/public/icons/heartMin.svg";
-import HeartBorderMin from "@/public/icons/HeartBorderMin.svg";
+import HeartBorderMin from "@/public/icons/heartBorderMin.svg";
 
 const Button = styled.button`
   background-color: transparent;
@@ -13,7 +13,7 @@ const Button = styled.button`
 
 const IconHeart = styled(Heart)<{ $isHover: boolean }>`
   z-index: 1;
-  fill: red;
+  fill: var(--item-color);
   transform: scale(1);
   transition: fill 0.5s;
 `;
@@ -27,14 +27,14 @@ const IconHeartBorder = styled(HeartBorder)<{ $isHover: boolean }>`
 
 const IconHeartMin = styled(HeartMin)<{ $isHover: boolean }>`
   z-index: 1;
-  fill: ${(props) => (props.$isHover ? "white" : "red")};
+  fill: ${(props) => (props.$isHover ? "white" : "var(--item-color)")};
   transform: scale(1);
   transition: fill 0.5s;
 `;
 
 const IconHeartBorderMin = styled(HeartBorderMin)<{ $isHover: boolean }>`
   z-index: 1;
-  fill: ${(props) => (props.$isHover ? "white" : "red")};
+  fill: ${(props) => (props.$isHover ? "white" : "var(--item-color)")};
   transform: scale(1);
   transition: fill 0.5s;
 `;

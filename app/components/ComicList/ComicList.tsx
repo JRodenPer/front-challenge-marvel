@@ -14,24 +14,22 @@ const MainContainer = styled.div`
   align-items: center;
   flex-direction: column;
   margin-top: 48px;
+  margin-bottom: 48px;
   gap: 24px;
 `;
 
 const ListContainer = styled.div`
-  overflow-x: auto;
-  overflow-y: hidden;
   white-space: nowrap;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   cursor: grab;
   user-select: none;
   width: 960px;
-  align-items: stretch;
   gap: 16px;
-
-  &:active {
-    cursor: grabbing;
-  }
+  padding-bottom: 24px;
+  overflow-x: hidden;
+  max-width: 100%;
+  padding-left: var(--space-24);
 
   img {
     user-drag: none;
@@ -39,16 +37,30 @@ const ListContainer = styled.div`
     pointer-events: none;
   }
 
-  &::-webkit-scrollbar {
-    height: 4px;
-  }
+  @media (min-width: 768px) {
+    padding-left: 0;
+    overflow-x: auto;
+    &:active {
+      cursor: grabbing;
+    }
 
-  &::-webkit-scrollbar-thumb {
-    background-color: red;
-  }
+    &::-webkit-scrollbar {
+      height: 4px;
+    }
 
-  &::-webkit-scrollbar-track {
-    background-color: #d9d9d9;
+    &::-webkit-scrollbar-thumb {
+      background-color: var(--item-color);
+    }
+
+    &::-webkit-scrollbar-track {
+      background-color: #d9d9d9;
+    }
+    &::-webkit-scrollbar-thumb:hover {
+      cursor: default;
+    }
+    &::-webkit-scrollbar-track:hover {
+      cursor: default;
+    }
   }
 `;
 
@@ -64,6 +76,11 @@ const TitleContainer = styled.div`
   user-select: none;
   width: 960px;
   align-items: stretch;
+  max-width: 100%;
+
+  @media (max-width: 768px) {
+    padding-left: var(--space-24);
+  }
 `;
 
 const ComicList: React.FC<ComicListProps> = ({ children }) => {
@@ -80,10 +97,6 @@ const ComicList: React.FC<ComicListProps> = ({ children }) => {
     }
   };
 
-  const handleMouseLeave = () => {
-    isDown = false;
-  };
-
   const handleMouseUp = () => {
     isDown = false;
   };
@@ -98,15 +111,38 @@ const ComicList: React.FC<ComicListProps> = ({ children }) => {
     }
   };
 
+  const handleTouchStart = (e: React.TouchEvent<HTMLDivElement>) => {
+    isDown = true;
+    if (listRef.current) {
+      startX = e.touches[0].pageX - listRef.current.offsetLeft;
+      scrollLeft = listRef.current.scrollLeft;
+    }
+  };
+
+  const handleTouchMove = (e: React.TouchEvent<HTMLDivElement>) => {
+    if (!isDown) return;
+    if (listRef.current) {
+      const x = e.touches[0].pageX - listRef.current.offsetLeft;
+      const walk = x - startX;
+      listRef.current.scrollLeft = scrollLeft - walk;
+    }
+  };
+
+  const handleTouchEnd = () => {
+    isDown = false;
+  };
+
   return (
     <MainContainer>
       <TitleContainer>COMICS</TitleContainer>
       <ListContainer
         ref={listRef}
         onMouseDown={handleMouseDown}
-        onMouseLeave={handleMouseLeave}
         onMouseUp={handleMouseUp}
         onMouseMove={handleMouseMove}
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
       >
         {children}
       </ListContainer>

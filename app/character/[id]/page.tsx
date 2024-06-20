@@ -46,9 +46,7 @@ export default function CharacterPage() {
       )}
       {character && (
         <CharacterDetail
-          imageUrl={
-            character.thumbnail.path + "." + character.thumbnail.extension
-          }
+          imageUrl={`${character.thumbnail.path}.${character.thumbnail.extension}`}
           name={character.name}
           description={character.description}
           id={character.id}
@@ -59,7 +57,7 @@ export default function CharacterPage() {
           {comics.map((comic) => (
             <ComicCard
               key={comic.id}
-              imageUrl={comic.thumbnail.path + "." + comic.thumbnail.extension}
+              imageUrl={`${comic.thumbnail.path}.${comic.thumbnail.extension}`}
               title={comic.title}
               date={comic.date}
             />

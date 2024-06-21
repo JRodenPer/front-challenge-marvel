@@ -1,5 +1,3 @@
-Claro, aquí tienes el README.md traducido al inglés:
-
 ````markdown
 # Front-Challenge-Marvel
 

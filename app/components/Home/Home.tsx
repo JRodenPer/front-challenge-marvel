@@ -30,15 +30,15 @@ const Home: React.FC = () => {
       const filtered = likeView
         ? characters
             .filter((character: Character) =>
-              idCharacters.includes(character.id),
+              idCharacters.includes(character.id)
             )
             .filter((characterLike: Character) =>
               characterLike.name
                 .toLowerCase()
-                .includes(searchTerm.toLowerCase()),
+                .includes(searchTerm.toLowerCase())
             )
         : characters.filter((character: Character) =>
-            character.name.toLowerCase().includes(searchTerm.toLowerCase()),
+            character.name.toLowerCase().includes(searchTerm.toLowerCase())
           );
       setFilterCharacters(filtered);
       const items = filtered.length;
@@ -56,8 +56,11 @@ const Home: React.FC = () => {
       {charactersLoading && <LoadingBar isLoading={!charactersLoading} />}
       {characters && (
         <S.BodyContainer>
-          <SearchBar value={searchTerm} onChange={handleSearchChange} />
-          <S.CustomText>{resultText}</S.CustomText>
+          {likeView && <S.TitleContainer>FAVORITES</S.TitleContainer>}
+          <S.SearchContainer>
+            <SearchBar value={searchTerm} onChange={handleSearchChange} />
+            <S.CustomText>{resultText}</S.CustomText>
+          </S.SearchContainer>
           <CharacterList characters={filterCharacters} />
         </S.BodyContainer>
       )}

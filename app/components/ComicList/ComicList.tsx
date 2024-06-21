@@ -1,87 +1,6 @@
 import React, { useRef } from "react";
-import styled from "styled-components";
-
-interface ComicListProps {
-  children: React.ReactNode;
-}
-
-const MainContainer = styled.div`
-  display: flex;
-  position: relative;
-  overflow: hidden;
-  width: 100%;
-  height: 100%;
-  align-items: center;
-  flex-direction: column;
-  margin-top: 48px;
-  margin-bottom: 48px;
-  gap: 24px;
-`;
-
-const ListContainer = styled.div`
-  white-space: nowrap;
-  display: flex;
-  align-items: flex-start;
-  cursor: grab;
-  user-select: none;
-  width: 960px;
-  gap: 16px;
-  padding-bottom: 24px;
-  overflow-x: hidden;
-  max-width: 100%;
-  padding-left: var(--space-24);
-
-  img {
-    user-drag: none;
-    -webkit-user-drag: none;
-    pointer-events: none;
-  }
-
-  @media (min-width: 768px) {
-    padding-left: 0;
-    overflow-x: auto;
-    &:active {
-      cursor: grabbing;
-    }
-
-    &::-webkit-scrollbar {
-      height: 4px;
-    }
-
-    &::-webkit-scrollbar-thumb {
-      background-color: var(--item-color);
-    }
-
-    &::-webkit-scrollbar-track {
-      background-color: #d9d9d9;
-    }
-    &::-webkit-scrollbar-thumb:hover {
-      cursor: default;
-    }
-    &::-webkit-scrollbar-track:hover {
-      cursor: default;
-    }
-  }
-`;
-
-const TitleContainer = styled.div`
-  font-family: "Roboto Condensed", Helvetica, Arial, sans-serif;
-  font-style: normal;
-  font-weight: 700;
-  font-size: 32px;
-  line-height: 38px;
-  display: flex;
-  align-items: center;
-  cursor: grab;
-  user-select: none;
-  width: 960px;
-  align-items: stretch;
-  max-width: 100%;
-
-  @media (max-width: 768px) {
-    padding-left: var(--space-24);
-  }
-`;
+import * as S from "./ComicList.styles";
+import { ComicListProps } from "./ComicList.types";
 
 const ComicList: React.FC<ComicListProps> = ({ children }) => {
   const listRef = useRef<HTMLDivElement>(null);
@@ -133,9 +52,9 @@ const ComicList: React.FC<ComicListProps> = ({ children }) => {
   };
 
   return (
-    <MainContainer>
-      <TitleContainer>COMICS</TitleContainer>
-      <ListContainer
+    <S.MainContainer>
+      <S.TitleContainer>COMICS</S.TitleContainer>
+      <S.ListContainer
         ref={listRef}
         onMouseDown={handleMouseDown}
         onMouseUp={handleMouseUp}
@@ -145,8 +64,8 @@ const ComicList: React.FC<ComicListProps> = ({ children }) => {
         onTouchEnd={handleTouchEnd}
       >
         {children}
-      </ListContainer>
-    </MainContainer>
+      </S.ListContainer>
+    </S.MainContainer>
   );
 };
 

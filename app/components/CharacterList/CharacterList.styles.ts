@@ -6,7 +6,10 @@ export const List = styled.ul`
   grid-template-columns: repeat(auto-fill, minmax(172.5px, 1fr));
   list-style: none;
   gap: var(--space-16);
-  padding: 0;
+  padding: var(--space-12) var(--space-48);
+  @media (max-width: 480px) {
+    padding: var(--space-12) var(--space-16);
+  }
 `;
 
 export const ListItem = styled.li`

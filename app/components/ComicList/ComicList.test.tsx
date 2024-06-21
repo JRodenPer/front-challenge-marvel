@@ -8,7 +8,7 @@ describe("ComicList", () => {
     children: <div>Comic Item</div>,
   };
 
-  test("renders without crashing", () => {
+  test("renders the component", () => {
     const { container } = render(<ComicList {...defaultProps} />);
     expect(container).toBeInTheDocument();
   });

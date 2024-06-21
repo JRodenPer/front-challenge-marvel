@@ -1,70 +1,29 @@
-import styled from "styled-components";
-import Heart from "@/public/icons/heart.svg";
-import HeartBorder from "@/public/icons/heartBorder.svg";
-import HeartMin from "@/public/icons/heartMin.svg";
-import HeartBorderMin from "@/public/icons/heartBorderMin.svg";
+import * as S from "./HeartButton.styles";
+import { ButtonSize, HeartButtonProps } from "./HeartButton.types";
 
-const Button = styled.button`
-  background-color: transparent;
-  border: none;
-  padding: 0;
-  cursor: pointer;
-`;
-
-const IconHeart = styled(Heart)<{ $isHover: boolean }>`
-  z-index: 1;
-  fill: var(--item-color);
-  transform: scale(1);
-  transition: fill 0.5s;
-`;
-
-const IconHeartBorder = styled(HeartBorder)<{ $isHover: boolean }>`
-  z-index: 1;
-  fill: white;
-  transform: scale(1);
-  transition: fill 0.5s;
-`;
-
-const IconHeartMin = styled(HeartMin)<{ $isHover: boolean }>`
-  z-index: 1;
-  fill: ${(props) => (props.$isHover ? "white" : "var(--item-color)")};
-  transform: scale(1);
-  transition: fill 0.5s;
-`;
-
-const IconHeartBorderMin = styled(HeartBorderMin)<{ $isHover: boolean }>`
-  z-index: 1;
-  fill: ${(props) => (props.$isHover ? "white" : "var(--item-color)")};
-  transform: scale(1);
-  transition: fill 0.5s;
-`;
-
-interface HeartButtonProps {
-  isHover: boolean;
-  isLike: boolean;
-  size?: "SMALL" | "BIG";
-  onClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
-}
 const HeartButton: React.FC<HeartButtonProps> = ({
   isHover,
   isLike,
-  size = "SMALL",
+  size = ButtonSize.SMALL,
   onClick,
 }) => {
   return (
-    <Button onClick={onClick}>
+    <S.Button onClick={onClick}>
       {isLike ? (
-        size === "SMALL" ? (
-          <IconHeartMin $isHover={isHover} />
+        size === ButtonSize.SMALL ? (
+          <S.IconHeartMin $isHover={isHover} data-testid="icon-heart-min" />
         ) : (
-          <IconHeart $isHover={isHover} />
+          <S.IconHeart $isHover={isHover} data-testid="icon-heart" />
         )
-      ) : size === "SMALL" ? (
-        <IconHeartBorderMin $isHover={isHover} />
+      ) : size === ButtonSize.SMALL ? (
+        <S.IconHeartBorderMin
+          $isHover={isHover}
+          data-testid="icon-heart-border-min"
+        />
       ) : (
-        <IconHeartBorder $isHover={isHover} />
+        <S.IconHeartBorder $isHover={isHover} data-testid="icon-heart-border" />
       )}
-    </Button>
+    </S.Button>
   );
 };
 

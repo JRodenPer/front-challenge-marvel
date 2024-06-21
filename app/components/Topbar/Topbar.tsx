@@ -17,9 +17,9 @@ const Topbar: React.FC<TopbarProps> = ({
         src="/icons/marvelLogo.svg"
         alt="Logo"
       />
-      <S.LikesContainer onClick={onLikeClick}>
+      <S.LikesContainer onClick={onLikeClick} data-testid="likes-container">
         <Heart fill="red" />
-        <S.CustomText>{likes}</S.CustomText>
+        <p>{likes}</p>
       </S.LikesContainer>
     </S.TopbarContainer>
   );

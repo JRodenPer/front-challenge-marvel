@@ -22,8 +22,8 @@ export const AnimationContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: black;
-  color: white;
+  background-color: var(--primary-color);
+  color: var(--secondary-color);
   border-top: 1px solid gray;
   animation: ${slideDown} 0.5s ease-out forwards;
 `;

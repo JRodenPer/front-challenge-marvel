@@ -5,6 +5,7 @@ const GlobalStyle = createGlobalStyle`
     --primary-color: #000;
     --secondary-color: #fff;
     --item-color: #ec1d24;
+    --gray-color: #aaa;
     --text-color-primary: #000;
     --text-color-secondary: #fff;
     --font-family: "Roboto Condensed", Roboto, Arial, sans-serif;
@@ -31,8 +32,14 @@ const GlobalStyle = createGlobalStyle`
     --space-neg-18: -18px;
     --space-neg-9: -9px;
     --space-8: 8px;
+    --space-10: 10px;
+    --space-12: 12px;
+    --space-13: 13px;
+    --space-14: 14px;
+    --space-15: 15px;
     --space-16: 16px;
     --space-18: 18px;
+    --space-20: 20px;
     --space-24: 24px;
     --space-36: 36px;
     --space-48: 48px;

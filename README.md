@@ -6,15 +6,15 @@ This project is a technical test featuring Marvel characters, consisting of two 
 
 ### General View
 
-![General View](image.png)
+![alt text](general.png)
 
 ### Character View
 
-![Character View](image-1.png)
+![alt text](character.png)
 
 ### Mobile View
 
-![Mobile View](image-2.png)
+![alt text](mobile.png)
 
 ## Technologies Used
 
@@ -34,6 +34,7 @@ To run the project, follow these steps:
    MARVEL_PUBLIC_KEY=your_public_key
    MARVEL_PRIVATE_KEY=your_private_key
    ```
+
 ````
 
 2. Install the project dependencies:
@@ -118,3 +119,4 @@ page.tsx
 
 The application is deployed and accessible at the following URL:
 https://j-front-challenge-marvel.netlify.app
+````

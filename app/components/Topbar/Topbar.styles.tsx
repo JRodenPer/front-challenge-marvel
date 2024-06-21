@@ -1,14 +1,18 @@
 import styled from "styled-components";
 
 export const TopbarContainer = styled.div`
-  background-color: #000;
-  color: #fff;
-  padding: 16px 48px;
+  background-color: var(--primary-color);
+  color: var(--secondary-color);
+  padding: var(--space-16) var(--space-48);
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-direction: row;
-  z-index: 200;
+  gap: var(--space-20);
+
+  @media (max-width: 480px) {
+    padding: var(--space-16);
+  }
 `;
 
 export const LogoImage = styled.img`
@@ -20,14 +24,6 @@ export const LogoImage = styled.img`
 export const LikesContainer = styled.div`
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: var(--space-8);
   cursor: pointer;
-`;
-
-export const CustomText = styled.div`
-  font-family: "Roboto Condensed", sans-serif;
-  font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 19px;
 `;

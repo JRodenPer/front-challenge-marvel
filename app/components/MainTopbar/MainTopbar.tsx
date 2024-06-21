@@ -1,16 +1,9 @@
 "use client";
 
-import CharacterList from "../CharacterList";
 import Topbar from "../Topbar";
-import { Character } from "../CharacterList/CharacterList.types";
-import { useQuery } from "react-query";
-import LoadingBar from "../LoadingBar";
-import { ChangeEvent, useEffect, useState } from "react";
-import SearchBar from "../SearchBar";
-import { fetchCharacters } from "@/app/utils/fetchCharacters";
+import { useEffect, useState } from "react";
 import { useLikes } from "@/app/contexts/LikesContext";
-import { Main } from "next/document";
-import { redirect, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 const MainTopbar: React.FC = () => {
   const { push } = useRouter();

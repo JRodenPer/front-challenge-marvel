@@ -1,6 +1,6 @@
 import React, { ReactNode, createContext, useContext, useState } from "react";
 
-type LikesContextType = {
+export type LikesContextType = {
   idCharacters: string[];
   likeView: boolean;
   addId: (id: string) => void;
@@ -13,7 +13,7 @@ type LikesProviderProps = {
   children: ReactNode;
 };
 
-const LikesContext = createContext<LikesContextType>({
+export const LikesContext = createContext<LikesContextType>({
   idCharacters: [],
   likeView: false,
   addId: () => {},

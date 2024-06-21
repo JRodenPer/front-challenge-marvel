@@ -1,96 +1,8 @@
 import React, { useEffect, useState } from "react";
-import styled, { keyframes } from "styled-components";
+import * as S from "./CharacterDetail.styles";
 import HeartButton from "../HeartButton";
 import { useLikes } from "@/app/contexts/LikesContext";
-
-interface CharacterDetailProps {
-  name: string;
-  description: string;
-  imageUrl: string;
-  id: string;
-}
-
-const slideDown = keyframes`
-    0% {
-        opacity: 0;
-        transform: translateY(-100%);
-    }
-    100% {
-        opacity: 1;
-        transform: translateY(0);
-    }
-`;
-
-const MainContainer = styled.div`
-  position: relative;
-  overflow: hidden;
-  width: 100%;
-  height: 100%;
-`;
-
-const AnimationContainer = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: black;
-  color: white;
-  border-top: 1px solid gray;
-  animation: ${slideDown} 0.5s ease-out forwards;
-`;
-
-const Container = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: row;
-  width: 960px;
-  height: 100%;
-`;
-
-const Image = styled.img`
-  width: 320px;
-  height: 320px;
-  object-fit: cover;
-`;
-
-const Title = styled.h1`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  justify-content: space-between;
-
-  font-family: "Roboto Condensed", Helvetica, Arial, sans-serif;
-  font-style: normal;
-  font-weight: 700;
-  font-size: 40px;
-  line-height: 47px;
-  text-transform: uppercase;
-`;
-
-const DetailsContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-  margin-top: 20px;
-  width: 100%;
-`;
-
-const TextContainer = styled.div`
-  flex: 1;
-  padding: 0 20px;
-`;
-
-const Decoration = styled.div`
-  position: absolute;
-  background: white;
-  z-index: 2;
-
-  width: 36px;
-  height: 36px;
-  right: -18px;
-  bottom: -18px;
-  transform: rotate(45deg);
-`;
+import { CharacterDetailProps } from "./CharacterDetail.types";
 
 const CharacterDetail: React.FC<CharacterDetailProps> = ({
   name,
@@ -114,13 +26,13 @@ const CharacterDetail: React.FC<CharacterDetailProps> = ({
   };
 
   return (
-    <MainContainer>
-      <AnimationContainer>
-        <Container>
-          <Image src={imageUrl} alt={name} />
-          <DetailsContainer>
-            <TextContainer>
-              <Title>
+    <S.MainContainer>
+      <S.AnimationContainer>
+        <S.Container>
+          <S.Image src={imageUrl} alt={name} />
+          <S.DetailsContainer>
+            <S.TextContainer>
+              <S.Title>
                 {name}
                 <HeartButton
                   isHover={false}
@@ -128,14 +40,14 @@ const CharacterDetail: React.FC<CharacterDetailProps> = ({
                   size={"BIG"}
                   onClick={handleClick}
                 />
-              </Title>
+              </S.Title>
               <p>{description}</p>
-            </TextContainer>
-          </DetailsContainer>
-        </Container>
-        <Decoration />
-      </AnimationContainer>
-    </MainContainer>
+            </S.TextContainer>
+          </S.DetailsContainer>
+        </S.Container>
+        <S.Decoration />
+      </S.AnimationContainer>
+    </S.MainContainer>
   );
 };
 

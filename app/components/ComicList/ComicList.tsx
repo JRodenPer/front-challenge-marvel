@@ -1,70 +1,6 @@
 import React, { useRef } from "react";
-import styled from "styled-components";
-
-interface ComicListProps {
-  children: React.ReactNode;
-}
-
-const MainContainer = styled.div`
-  display: flex;
-  position: relative;
-  overflow: hidden;
-  width: 100%;
-  height: 100%;
-  align-items: center;
-  flex-direction: column;
-  margin-top: 48px;
-  gap: 24px;
-`;
-
-const ListContainer = styled.div`
-  overflow-x: auto;
-  overflow-y: hidden;
-  white-space: nowrap;
-  display: flex;
-  align-items: center;
-  cursor: grab;
-  user-select: none;
-  width: 960px;
-  align-items: stretch;
-  gap: 16px;
-
-  &:active {
-    cursor: grabbing;
-  }
-
-  img {
-    user-drag: none;
-    -webkit-user-drag: none;
-    pointer-events: none;
-  }
-
-  &::-webkit-scrollbar {
-    height: 4px;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background-color: red;
-  }
-
-  &::-webkit-scrollbar-track {
-    background-color: #d9d9d9;
-  }
-`;
-
-const TitleContainer = styled.div`
-  font-family: "Roboto Condensed", Helvetica, Arial, sans-serif;
-  font-style: normal;
-  font-weight: 700;
-  font-size: 32px;
-  line-height: 38px;
-  display: flex;
-  align-items: center;
-  cursor: grab;
-  user-select: none;
-  width: 960px;
-  align-items: stretch;
-`;
+import * as S from "./ComicList.styles";
+import { ComicListProps } from "./ComicList.types";
 
 const ComicList: React.FC<ComicListProps> = ({ children }) => {
   const listRef = useRef<HTMLDivElement>(null);
@@ -78,10 +14,6 @@ const ComicList: React.FC<ComicListProps> = ({ children }) => {
       startX = e.pageX - listRef.current.offsetLeft;
       scrollLeft = listRef.current.scrollLeft;
     }
-  };
-
-  const handleMouseLeave = () => {
-    isDown = false;
   };
 
   const handleMouseUp = () => {
@@ -98,19 +30,42 @@ const ComicList: React.FC<ComicListProps> = ({ children }) => {
     }
   };
 
+  const handleTouchStart = (e: React.TouchEvent<HTMLDivElement>) => {
+    isDown = true;
+    if (listRef.current) {
+      startX = e.touches[0].pageX - listRef.current.offsetLeft;
+      scrollLeft = listRef.current.scrollLeft;
+    }
+  };
+
+  const handleTouchMove = (e: React.TouchEvent<HTMLDivElement>) => {
+    if (!isDown) return;
+    if (listRef.current) {
+      const x = e.touches[0].pageX - listRef.current.offsetLeft;
+      const walk = x - startX;
+      listRef.current.scrollLeft = scrollLeft - walk;
+    }
+  };
+
+  const handleTouchEnd = () => {
+    isDown = false;
+  };
+
   return (
-    <MainContainer>
-      <TitleContainer>COMICS</TitleContainer>
-      <ListContainer
+    <S.MainContainer>
+      <S.TitleContainer>COMICS</S.TitleContainer>
+      <S.ListContainer
         ref={listRef}
         onMouseDown={handleMouseDown}
-        onMouseLeave={handleMouseLeave}
         onMouseUp={handleMouseUp}
         onMouseMove={handleMouseMove}
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
       >
         {children}
-      </ListContainer>
-    </MainContainer>
+      </S.ListContainer>
+    </S.MainContainer>
   );
 };
 

@@ -3,7 +3,7 @@
 import { useQuery } from "react-query";
 import { fetchComics } from "@/app/utils/fetchComics";
 import { usePathname } from "next/navigation";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { fetchCharacter } from "@/app/utils/fetchCharacter";
 import CharacterDetail from "@/app/components/CharacterDetail";
 import LoadingBar from "@/app/components/LoadingBar";
@@ -15,23 +15,23 @@ export default function CharacterPage() {
 
   const [id, setId] = useState<string | null>(null);
 
-  const {
-    data: comics,
-    isLoading: comicsLoading,
-    isError: comicsError,
-  } = useQuery(["comics", id], () => fetchComics(id as string), {
-    enabled: !!id,
-    refetchOnWindowFocus: false,
-  });
+  const { data: comics, isLoading: comicsLoading } = useQuery(
+    ["comics", id],
+    () => fetchComics(id as string),
+    {
+      enabled: !!id,
+      refetchOnWindowFocus: false,
+    }
+  );
 
-  const {
-    data: character,
-    isLoading: characterLoading,
-    isError: characterError,
-  } = useQuery(["character", id], () => fetchCharacter(id as string), {
-    enabled: !!id,
-    refetchOnWindowFocus: false,
-  });
+  const { data: character, isLoading: characterLoading } = useQuery(
+    ["character", id],
+    () => fetchCharacter(id as string),
+    {
+      enabled: !!id,
+      refetchOnWindowFocus: false,
+    }
+  );
 
   useEffect(() => {
     const pathParts = pathname.split("/");
@@ -46,9 +46,7 @@ export default function CharacterPage() {
       )}
       {character && (
         <CharacterDetail
-          imageUrl={
-            character.thumbnail.path + "." + character.thumbnail.extension
-          }
+          imageUrl={`${character.thumbnail.path}.${character.thumbnail.extension}`}
           name={character.name}
           description={character.description}
           id={character.id}
@@ -59,7 +57,7 @@ export default function CharacterPage() {
           {comics.map((comic) => (
             <ComicCard
               key={comic.id}
-              imageUrl={comic.thumbnail.path + "." + comic.thumbnail.extension}
+              imageUrl={`${comic.thumbnail.path}.${comic.thumbnail.extension}`}
               title={comic.title}
               date={comic.date}
             />

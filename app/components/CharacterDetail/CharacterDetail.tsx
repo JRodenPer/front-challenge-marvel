@@ -3,6 +3,7 @@ import * as S from "./CharacterDetail.styles";
 import HeartButton from "../HeartButton";
 import { useLikes } from "@/app/contexts/LikesContext";
 import { CharacterDetailProps } from "./CharacterDetail.types";
+import { ButtonSize } from "../HeartButton/HeartButton.types";
 
 const CharacterDetail: React.FC<CharacterDetailProps> = ({
   name,
@@ -37,7 +38,7 @@ const CharacterDetail: React.FC<CharacterDetailProps> = ({
                 <HeartButton
                   isHover={false}
                   isLike={isLike}
-                  size={"BIG"}
+                  size={ButtonSize.BIG}
                   onClick={handleClick}
                 />
               </S.Title>

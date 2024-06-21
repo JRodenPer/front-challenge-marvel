@@ -35,8 +35,6 @@ To run the project, follow these steps:
    MARVEL_PRIVATE_KEY=your_private_key
    ```
 
-````
-
 2. Install the project dependencies:
 
    ```bash
@@ -119,4 +117,3 @@ page.tsx
 
 The application is deployed and accessible at the following URL:
 https://j-front-challenge-marvel.netlify.app
-````

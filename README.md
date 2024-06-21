@@ -1,4 +1,3 @@
-````markdown
 # Front-Challenge-Marvel
 
 This project is a technical test featuring Marvel characters, consisting of two main views. The first view displays a list of 50 characters, while the second view provides details about a selected character. Additionally, the application allows users to mark characters as favorites.
